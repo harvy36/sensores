@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>API</title>
+</head>
+<body>
+    <h1>API</h1>
+    <div id="datos"></div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+    <script>
+        function llamarAPI() {
+            // Obtener el host y el puerto
+            var host = window.location.hostname;
+            var port = window.location.port; 
+            // Crea una solicitud POST
+            const request = new Request('https://' + host + '/sensorsApi', {
+              method: 'GET',
+              headers: {
+                'Content-Type': 'application/json'
+              }
+            });
+          
+            // Envia la solicitud
+            fetch(request).then(function(response) {
+              // Procesa la respuesta
+              if (response.ok) {
+                // Convierte la respuesta a JSON
+                response.json().then(function(data) {
+                  // Aqui se procesa la respuesta
+                  document.getElementById("datos").textContent = JSON.stringify(data);
+                });
+                // setear los datos en el grafico
+                var datos = JSON.parse(document.getElementById("datos").textContent);
+                console.log(datos.sensorPIR);
+                chart.data.labels = datos.sensorPIR;
+                chart.data.datasets[0].data = datos.sensorDistance;
+                chart.update();
+              } else {
+                // La respuesta no fue exitosa
+                console.log(response.statusText);
+              }
+            });
+        }
+        {/* llamar el api cada 10 segundo */}
+        setInterval(llamarAPI, 10000);
+        var datos = JSON.parse(document.getElementById("datos").textContent);
+        var ctx = document.getElementById("chart").getContext("2d");
+        var chart = new Chart(ctx, {
+            type: "line",
+            data: {
+                labels: datos.sensorPIR,
+                datasets: [{
+                    label: "Datos",
+                    data: datos.sensorFoto
+                }]
+            },
+            options: {}
+        });
+
+    </script>
+</body>
+</html>
