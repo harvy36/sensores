@@ -30,6 +30,8 @@ def sensorsApi():
             sensorDistance = data["sensorDistance"]
             # get the value of the 'sensorTemperature' element
             sensorTemperature = data["sensorTemperature"]
+            # get the value of the 'sensorHumedad' element
+            sensorHumedad = data["sensorHumedad"]
         except:
             pass
         # save the data in a variable
@@ -39,20 +41,23 @@ def sensorsApi():
             data_return["sensorDistance"] = sensorDistance
         if "sensorTemperature" in data:
             data_return["sensorTemperature"] = sensorTemperature
+        if "sensorHumedad" in data:
+            data_return["sensorHumedad"] = sensorHumedad
         print(data_return)
         save_data(data_return)
         return "POST OK"
     else:
         #  get the data from the database
         data_pir = get_data_table("SensorPir")
-        print("data_pir", data_pir)
         data_distance = get_data_table("SensorDistance")
         data_temperature = get_data_table("SensorTemperature")
+        data_humedad = get_data_table("SensorHumedad")
         # save the data in a variable
         data_return = {}
         data_return["sensorPIR"] = data_pir
         data_return["sensorDistance"] = data_distance
         data_return["sensorTemperature"] = data_temperature
+        data_return["sensorHumedad"] = data_humedad
         print(data_return)
         return data_return
 

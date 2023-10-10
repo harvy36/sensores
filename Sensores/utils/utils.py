@@ -36,7 +36,15 @@ def config_db():
         fecha TEXT
         )"""
     )
-    # save the changes in the database
+    conn.commit()
+    # crete table humedad
+    cursor.execute(
+        """CREATE TABLE IF NOT EXISTS SensorHumedad (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        sensorHumedad TEXT,
+        fecha TEXT
+        )"""
+    )
     conn.commit()
     # close the connection to the database
     conn.close()
@@ -71,18 +79,25 @@ def save_data(data):
             "INSERT INTO SensorPir (sensorPIR, fecha) VALUES (?, datetime('now', 'localtime'))",
             (data["sensorPIR"],),
         )
+        conn.commit()
     if "sensorDistance" in data:
         cursor.execute(
             "INSERT INTO SensorDistance (sensorDistance, fecha) VALUES (?, datetime('now', 'localtime'))",
             (data["sensorDistance"],),
         )
+        conn.commit()
     if "sensorTemperature" in data:
         cursor.execute(
             "INSERT INTO SensorTemperature (sensorTemperature, fecha) VALUES (?, datetime('now', 'localtime'))",
             (data["sensorTemperature"],),
         )
-    # save the changes in the database
-    conn.commit()
+        conn.commit()
+    if "sensorHumedad" in data:
+        cursor.execute(
+            "INSERT INTO SensorHumedad (sensorHumedad, fecha) VALUES (?, datetime('now', 'localtime'))",
+            (data["sensorHumedad"],),
+        )
+        conn.commit()
     # close the connection to the database
     conn.close()
 
