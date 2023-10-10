@@ -31,7 +31,7 @@
           <div class="form-check form-switch">
             <input type="checkbox" class="form-check-input  d-none" id="customSwitch1">
             <!-- fontawesome icon -->
-            <label class=" btn btn-dark" for="customSwitch1"><i class="fas fa-play"></i></label>
+            <label class=" btn btn-dark" for="customSwitch1"><i class="fas fa-play" style="color: lightgreen;"></i></label>
           </div>
         </div>
       </div>
@@ -143,14 +143,14 @@
               nIntervId = setInterval(llamarAPI, 1000);
             }
             // change icon
-            document.getElementById("customSwitch1").nextElementSibling.innerHTML = "<i class='fas fa-stop'></i>";
+            document.getElementById("customSwitch1").nextElementSibling.innerHTML = "<i class='fas fa-stop' style='color: lightcoral;'></i>";
           }
           else {
             // stop nIntervId
             clearInterval(nIntervId);
             nIntervId = null;
             // change icon
-            document.getElementById("customSwitch1").nextElementSibling.innerHTML = "<i class='fas fa-play'></i>";
+            document.getElementById("customSwitch1").nextElementSibling.innerHTML = "<i class='fas fa-play' style='color: lightgreen;'></i>";
           }
         });
         // var datos = JSON.parse(document.getElementById("datos").textContent);
