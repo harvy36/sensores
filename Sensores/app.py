@@ -49,9 +49,14 @@ def sensorsApi():
     else:
         #  get the data from the database
         data_pir = get_data_table("SensorPir")
+        # get the last 10 data from the database
+        data_pir = data_pir[-10:]
         data_distance = get_data_table("SensorDistance")
+        data_distance = data_distance[-10:]
         data_temperature = get_data_table("SensorTemperature")
+        data_temperature = data_temperature[-10:]
         data_humedad = get_data_table("SensorHumedad")
+        data_humedad = data_humedad[-10:]
         # save the data in a variable
         data_return = {}
         data_return["sensorPIR"] = data_pir
