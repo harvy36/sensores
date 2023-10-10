@@ -23,6 +23,7 @@ def sensorsApi():
         sensorPIR = None
         sensorDistance = None
         sensorTemperature = None
+        sensorHumedad = None
         try:
             # get the value of the 'sensorPIR' element
             sensorPIR = data["sensorPIR"]
