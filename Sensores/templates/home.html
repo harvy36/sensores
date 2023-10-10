@@ -5,6 +5,8 @@
     <title>Sensores</title>
     <!-- Llamando el CDN de Bootstrap -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <!-- Llamando el CDN de fontawesome -->
+    <script src="https://kit.fontawesome.com/6d3b596002.js" crossorigin="anonymous"></script>
   </head>
 <body>
     <!-- Barra de navegacion -->
@@ -23,6 +25,14 @@
       <div class="row">
         <div class="col-12" style="margin-top: 20px; text-align: center;">
           <h1>Sensores</h1>
+        </div>
+        <div class="col-12" style="margin-top: 20px; text-align: center;">
+          <!-- switch button play and stop -->
+          <div class="form-check form-switch">
+            <input type="checkbox" class="form-check-input  d-none" id="customSwitch1">
+            <!-- fontawesome icon -->
+            <label class=" btn btn-dark" for="customSwitch1"><i class="fas fa-play"></i></label>
+          </div>
         </div>
       </div>
       <div id="datos" style="display: none;"></div>
@@ -54,7 +64,8 @@
             var host = window.location.hostname;
             var port = window.location.port; 
             // Crea una solicitud POST
-            const request = new Request('http://' + host + ':' + port + '/sensorsApi', {
+            // const request = new Request('http://' + host + ':' + port + '/sensorsApi', {
+            const request = new Request('https://' + host + '/sensorsApi', {
               method: 'GET',
               headers: {
                 'Content-Type': 'application/json'
@@ -117,8 +128,26 @@
             });
         }
         {/* llamar el api cada 10 segundo */}
-        setInterval(llamarAPI, 10000);
-        var datos = JSON.parse(document.getElementById("datos").textContent);
+        var switchButton = document.getElementById("customSwitch1");
+        let nIntervId;
+        switchButton.addEventListener("click", function() {
+          if (switchButton.checked) {
+            if (!nIntervId) {
+              // nIntervId = setInterval(llamarAPI, 10000);
+              nIntervId = setInterval(llamarAPI, 1000);
+            }
+            // change icon
+            document.getElementById("customSwitch1").nextElementSibling.innerHTML = "<i class='fas fa-stop'></i>";
+          }
+          else {
+            // stop nIntervId
+            clearInterval(nIntervId);
+            nIntervId = null;
+            // change icon
+            document.getElementById("customSwitch1").nextElementSibling.innerHTML = "<i class='fas fa-play'></i>";
+          }
+        });
+        // var datos = JSON.parse(document.getElementById("datos").textContent);
        
     </script>
 </body>
