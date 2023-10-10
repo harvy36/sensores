@@ -87,7 +87,13 @@
                   var tablaHTML = "<thead><tr><th scope='col' colspan='4'>Sensor PIR</th></tr><tr><th scope='col'>ID</th><th scope='col'>Valor</th><th scope='col'>Fecha</th></tr></thead><tbody>";
                   var sensorPIR_array = datos['sensorPIR'];
                   for (var i = 0; i < sensorPIR_array.length; i++) {
-                    tablaHTML += "<tr><td>" + sensorPIR_array[i][0] + "</td><td>" + sensorPIR_array[i][1] + "</td><td>" + sensorPIR_array[i][2] + "</td></tr>";
+                    tablaHTML += "<tr><td>" + sensorPIR_array[i][0] + "</td><td>" 
+                    if (sensorPIR_array[i][1] == 1) {
+                      tablaHTML += "Obstaculo";
+                    } else {
+                      tablaHTML += "No obstaculo";
+                    }
+                    tablaHTML += "</td><td>" + sensorPIR_array[i][2] + "</td></tr>";
                   }
                   tablaHTML += "</tbody>";
                   tabla.innerHTML = tablaHTML;
@@ -96,13 +102,7 @@
                   var tablaHTML = "<thead><tr><th colspan='4' scope='col'>Distancia</th></tr><tr><th scope='col'>ID</th><th scope='col'>Valor</th><th scope='col'>Fecha</th></tr></thead><tbody>";
                   var sensorDistance_array = datos['sensorDistance'];
                   for (var i = 0; i < sensorDistance_array.length; i++) {
-                    tablaHTML += "<tr><td>" + sensorDistance_array[i][0] + "</td><td>" 
-                    if (sensorDistance_array[i][1] == 1) {
-                      tablaHTML += "Obstaculo";
-                    } else {
-                      tablaHTML += "No obstaculo";
-                    }
-                    tablaHTML +="</td><td>" + sensorDistance_array[i][2] + "</td></tr>";
+                    tablaHTML += "<tr><td>" + sensorDistance_array[i][0] + "</td><td>" + sensorDistance_array[i][1] + "</td><td>" + sensorDistance_array[i][2] + "</td></tr>";
                   }
                   tablaHTML += "</tbody>";
                   tabla.innerHTML = tablaHTML;
